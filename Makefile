@@ -17,4 +17,4 @@ $(SERVER_KEYS): $(CA_KEYS) $(CERTS_DIR)/server.json
 .PHONY: etcd
 etcd: $(SERVER_KEYS)
 				docker kill etcd || true
-				docker run --rm -d --name etcd -v $$PWD/certs:/etc/etcd/pki:ro -p 2379:2379 quay.io/coreos/etcd:v3.4.13 etcd --cert-file '/etc/etcd/pki/server.crt' --key-file '/etc/etcd/pki/server.key' --listen-client-urls 'https://0.0.0.0:2379' --advertise-client-urls 'https://0.0.0.0:2379'
+				docker run --rm -d --name etcd -v $$PWD/certs:/etc/etcd/pki:ro -p 2379:2379 quay.io/coreos/etcd:v3.4.13 etcd --cert-file '/etc/etcd/pki/server.crt' --key-file '/etc/etcd/pki/server.key' --listen-client-urls 'https://0.0.0.0:2379' --advertise-client-urls 'https://0.0.0.0:2379' --log-level debug
